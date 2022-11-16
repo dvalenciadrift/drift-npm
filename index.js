@@ -51,7 +51,7 @@ async function updateContact(contactId, data, token) {
 	}
 }
 
-async function retrieveContact(contactId, token) {
+async function retrieveContactById(contactId, token) {
 	const headers = {
 		Authorization: `Bearer ${token}`,
 		"Content-Type": "application/json",
@@ -112,7 +112,7 @@ async function postEvent(data, token) {
 			{ contactId: data.contactId, event: data.event },
 			{ headers }
 		);
-		return response;
+		return response.data;
 	} catch (error) {
 		console.error(error);
 	}
@@ -139,7 +139,7 @@ module.exports = {
 	createMessage,
 	createContact,
 	updateContact,
-	retrieveContact,
+	retrieveContactById,
 	deleteContact,
 	unsuscribeContacts,
 	postEvent,
