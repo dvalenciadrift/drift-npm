@@ -198,3 +198,231 @@ driftApi.listCustomAttributes(token).then((res) => console.log(res));
   ]
 }
 ```
+
+## Conversations API
+
+### `createMessate(conversationId, options, token)`
+
+Post a new message into the specified conversation. You can send chat messages or private notes, send buttons and specify the drift user that is sending the message with their ID.
+
+#### Usage:
+
+```
+const driftApi =  require("drift-npm");
+const  token  =  "XXXXXXXXXXXXXX"; //Replace with your token;
+const  options  =  {
+	type:  "chat", //or "private_note"
+	body:  "This is the message body", //optional
+	"buttons":  [  //optional
+		{"value":  "yes please", "label":  "yes please", "type":  "reply"}],
+	"userId":  12345  //optional
+};
+driftApi.createMessage("3655684801", options, token).then((res) => console.log(res));
+```
+
+#### Result:
+
+```
+{
+  data: {
+    id: 14331424770,
+    conversationId: 3655684801,
+    body: 'This is the message body',
+    author: { id: 5136943, type: 'user', bot: true },
+    type: 'chat',
+    createdAt: 1672759766709,
+    context: { ip: '18.232.245.220', location: [Object] },
+    attributes: { developer_app_id: '7bcf4690-4696-4079-b5db-165ed74fa127' }
+  }
+}
+```
+
+### listConversations(options, token)
+
+Query the conversations in your Drift account. This is a paginated endpoint which defaults to 25 results per request and maximum 50 results.
+
+**statusId:**
+1: OPEN
+2: CLOSED
+3: PENDING
+
+#### Usage:
+
+```
+const driftApi =  require("drift-npm");
+const  token  =  "XXXXXXXXXXXXXX"; //Replace with your token;
+const  options  =  {
+	limit: 5, //optional (25 default, 50 max)
+	statusId: [1], //optional
+	next: "2", //optional
+};
+driftApi.listConversations(options, token).then((res) => console.log(res));
+```
+
+#### Result:
+
+```
+{
+  data: [
+    {
+      status: 'open',
+      contactId: 16657938742,
+      createdAt: 1671114583608,
+      id: 3669254414,
+      inboxId: 692556,
+      updatedAt: 1671114593381
+    },
+    {
+      status: 'open',
+      contactId: 16649655387,
+      createdAt: 1671047134090,
+      id: 3668802704,
+      inboxId: 692556,
+      updatedAt: 1671047198908
+    }
+  ],
+  pagination: { more: true, next: '4' },
+  links: {
+    self: 'https://api.drift.com/conversations/list?page_token=c3RhdHVzSWRzPTEmaGlnaGVzdFVwZGF0ZWRBdD0xNjcxMTE0NTkzMzgxJmhpZ2hlc3RJZD0zNjY5MjU0NDEzJmxpbWl0PTI',
+    next: 'https://api.drift.com/conversations/list?page_token=c3RhdHVzSWRzPTEmaGlnaGVzdFVwZGF0ZWRBdD0xNjcxMDQ3MTk4OTA4JmhpZ2hlc3RJZD0zNjY4ODAyNzA0JmxpbWl0PTI'
+  }
+}
+```
+
+### retrieveConversation(conversationId, token)
+
+Get detailed information about a particular conversation.
+
+#### Usage:
+
+```
+const driftApi =  require("drift-npm");
+const  token  =  "XXXXXXXXXXXXXX"; //Replace with your token;
+driftApi.retrieveConversation("3635813266", token).then((res) => console.log(res));
+```
+
+#### Result:
+
+```
+{
+  data: {
+    status: 'open',
+    participants: [ 5136942 ],
+    contactId: 16166831393,
+    createdAt: 1667330738928,
+    id: 3635813266,
+    relatedPlaybookId: 2536091,
+    inboxId: 692556,
+    updatedAt: 1668091121313
+  }
+}
+```
+
+### retrieveConversationMessages(conversationId, token)
+
+Returns an array of messages for a specific conversation.
+
+#### Usage:
+
+```
+const driftApi =  require("drift-npm");
+const  token  =  "XXXXXXXXXXXXXX"; //Replace with your token;
+driftApi.retrieveConversationMessages("3670145878", token).then((res) => console.log(res));
+```
+
+#### Result:
+
+```
+{
+  messages: [
+    {
+      id: 14272728303,
+      conversationId: 3670145878,
+      author: [Object],
+      type: 'chat',
+      createdAt: 1671223319461,
+      context: [Object],
+      attributes: [Object]
+    },
+    {
+      id: 14272728336,
+      conversationId: 3670145878,
+      body: '<p>Hey there!</p>',
+      author: [Object],
+      type: 'chat',
+      createdAt: 1671223319868,
+      attributes: {}
+    },
+    {
+      id: 14272728346,
+      conversationId: 3670145878,
+      body: '<p>Want to book a meeting</p>',
+      author: [Object],
+      type: 'chat',
+      createdAt: 1671223320031,
+      buttons: [Array],
+      attributes: {}
+    },
+    ...
+ ]
+}
+```
+
+### retrieveConversationTranscript(conversationId, token)
+
+Returns a formatted transcript for a specific conversation
+
+#### Usage:
+
+```
+const driftApi =  require("drift-npm");
+const  token  =  "XXXXXXXXXXXXXX"; //Replace with your token;
+driftApi.retrieveConversationTranscript("3670145878", token).then((res) => console.log(res));
+```
+
+#### Result:
+
+```
+Dec 16, 03:41:59 PM EST Bot (Agent): Hey there!
+Dec 16, 03:42:00 PM EST Bot (Agent): Want to book a meeting
+Dec 16, 03:42:04 PM EST null: Yes
+Dec 16, 03:42:05 PM EST Bot (Agent): I'll send you a meeting invite. What's your email address?
+Dec 16, 03:42:13 PM EST dvalencia@drift.com: dvalencia@drift.com
+Dec 16, 03:42:14 PM EST Bot (Agent): You can grab a time on agent@email.com's calendar here.
+Dec 16, 03:42:24 PM EST Bot (Agent): All set! I've sent an email confirmation to dvalencia@drift.com.
+```
+
+### createConversation(options, token)
+
+Use an email address to create a new conversation. A common use case is creating conversations in Drift that represent activity from other data sources, enabling Drift to be your one-stop shop for contact activity.
+Note that Drift cookies will not be attached to contacts created through the endpoint.
+
+#### Usage:
+
+```
+const driftApi =  require("drift-npm");
+const  token  =  "XXXXXXXXXXXXXX"; //Replace with your token;
+const options = {
+	email: "user@email.com",
+	message: {
+		body: "A conversation was started let's resume from drift!",
+		attributes: {
+			integrationSource: "Message from facebook",
+		},
+	},
+};
+driftApi.createConversation(options, token).then((res) => console.log(res));
+```
+
+#### Result:
+
+```
+{
+  status: 'open',
+  contactId: 15876049972,
+  createdAt: 1672785977005,
+  id: 3678044627,
+  inboxId: 692556,
+  updatedAt: 1672785977007
+}
+```
