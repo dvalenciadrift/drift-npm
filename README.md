@@ -201,7 +201,7 @@ driftApi.listCustomAttributes(token).then((res) => console.log(res));
 
 ## Conversations API
 
-### `createMessate(conversationId, options, token)`
+### `createMessage(conversationId, options, token)`
 
 Post a new message into the specified conversation. You can send chat messages or private notes, send buttons and specify the drift user that is sending the message with their ID.
 
@@ -237,7 +237,7 @@ driftApi.createMessage("3655684801", options, token).then((res) => console.log(r
 }
 ```
 
-### listConversations(options, token)
+### `listConversations(options,  token)`
 
 Query the conversations in your Drift account. This is a paginated endpoint which defaults to 25 results per request and maximum 50 results.
 
@@ -289,7 +289,7 @@ driftApi.listConversations(options, token).then((res) => console.log(res));
 }
 ```
 
-### retrieveConversation(conversationId, token)
+### `retrieveConversation(conversationId,  token)`
 
 Get detailed information about a particular conversation.
 
@@ -318,7 +318,7 @@ driftApi.retrieveConversation("3635813266", token).then((res) => console.log(res
 }
 ```
 
-### retrieveConversationMessages(conversationId, token)
+### `retrieveConversationMessages(conversationId,  token)`
 
 Returns an array of messages for a specific conversation.
 
@@ -368,7 +368,7 @@ driftApi.retrieveConversationMessages("3670145878", token).then((res) => console
 }
 ```
 
-### retrieveConversationTranscript(conversationId, token)
+### `retrieveConversationTranscript(conversationId, token)`
 
 Returns a formatted transcript for a specific conversation
 
@@ -392,7 +392,7 @@ Dec 16, 03:42:14 PM EST Bot (Agent): You can grab a time on agent@email.com's ca
 Dec 16, 03:42:24 PM EST Bot (Agent): All set! I've sent an email confirmation to dvalencia@drift.com.
 ```
 
-### createConversation(options, token)
+### `createConversation(options,  token)`
 
 Use an email address to create a new conversation. A common use case is creating conversations in Drift that represent activity from other data sources, enabling Drift to be your one-stop shop for contact activity.
 Note that Drift cookies will not be attached to contacts created through the endpoint.
