@@ -1,11 +1,11 @@
-# drift-npm
+# driftapi-npm
 
 Drift API wrapper for Node.
 
 ## Installation
 
 ```
-npm install drift-npm --save
+npm install driftapi-npm --save
 ```
 
 ## API Token
