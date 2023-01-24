@@ -19,7 +19,7 @@ When creating a new contact, you must send an `attributes` object that contains,
 #### Usage:
 
 ```
-const driftApi =  require("drift-npm");
+const driftApi =  require("driftapi-npm");
 const  token  =  "XXXXXXXXXXXXXX"; //Replace with your token;
 const  attributes  =  {
 			email:  "newcontact@email.com",
@@ -58,7 +58,7 @@ To create and maintain custom attributes, just perform a PATCH with the new attr
 #### Usage:
 
 ```
-const driftApi =  require("drift-npm");
+const driftApi =  require("driftapi-npm");
 const  token  =  "XXXXXXXXXXXXXX"; //Replace with your token;
 const  attributesToUpdate  =  {
 					name:  "Updated Contact",
@@ -95,7 +95,7 @@ You can retrieve contacts using their `contactId`
 #### Usage:
 
 ```
-const driftApi =  require("drift-npm");
+const driftApi =  require("driftapi-npm");
 const  token  =  "XXXXXXXXXXXXXX"; //Replace with your token;
 driftApi.retrieveContactById("16344778575", token).then((res)  => console.log(res.data));
 ```
@@ -127,7 +127,7 @@ When unsubscribing contacts, just provide an array of emails as the first parame
 #### Usage:
 
 ```
-const driftApi =  require("drift-npm");
+const driftApi =  require("driftapi-npm");
 const  token  =  "XXXXXXXXXXXXXX"; //Replace with your token;
 const  emails  = ["newcontact@email.com"];
 driftApi.unsuscribeContacts(emails, token).then((res) => console.log(res));
@@ -148,7 +148,7 @@ To post a Timeline Event to a contact you need to pass an `eventData` object wit
 #### Usage:
 
 ```
-const driftApi =  require("drift-npm");
+const driftApi =  require("driftapi-npm");
 const  token  =  "XXXXXXXXXXXXXX"; //Replace with your token;
 const  eventData  =  {
 				contactId:  "16344778575",
@@ -177,7 +177,7 @@ You can use `listCustomAttributes` to return all the created/enabled custom cont
 #### Usage:
 
 ```
-const driftApi =  require("drift-npm");
+const driftApi =  require("driftapi-npm");
 const  token  =  "XXXXXXXXXXXXXX"; //Replace with your token;
 driftApi.listCustomAttributes(token).then((res) => console.log(res));
 ```
@@ -208,7 +208,7 @@ Post a new message into the specified conversation. You can send chat messages o
 #### Usage:
 
 ```
-const driftApi =  require("drift-npm");
+const driftApi =  require("driftapi-npm");
 const  token  =  "XXXXXXXXXXXXXX"; //Replace with your token;
 const  options  =  {
 	type:  "chat", //or "private_note"
@@ -249,7 +249,7 @@ Query the conversations in your Drift account. This is a paginated endpoint whic
 #### Usage:
 
 ```
-const driftApi =  require("drift-npm");
+const driftApi =  require("driftapi-npm");
 const  token  =  "XXXXXXXXXXXXXX"; //Replace with your token;
 const  options  =  {
 	limit: 5, //optional (25 default, 50 max)
@@ -296,7 +296,7 @@ Get detailed information about a particular conversation.
 #### Usage:
 
 ```
-const driftApi =  require("drift-npm");
+const driftApi =  require("driftapi-npm");
 const  token  =  "XXXXXXXXXXXXXX"; //Replace with your token;
 driftApi.retrieveConversation("3635813266", token).then((res) => console.log(res));
 ```
@@ -325,7 +325,7 @@ Returns an array of messages for a specific conversation.
 #### Usage:
 
 ```
-const driftApi =  require("drift-npm");
+const driftApi =  require("driftapi-npm");
 const  token  =  "XXXXXXXXXXXXXX"; //Replace with your token;
 driftApi.retrieveConversationMessages("3670145878", token).then((res) => console.log(res));
 ```
@@ -375,7 +375,7 @@ Returns a formatted transcript for a specific conversation
 #### Usage:
 
 ```
-const driftApi =  require("drift-npm");
+const driftApi =  require("driftapi-npm");
 const  token  =  "XXXXXXXXXXXXXX"; //Replace with your token;
 driftApi.retrieveConversationTranscript("3670145878", token).then((res) => console.log(res));
 ```
@@ -400,7 +400,7 @@ Note that Drift cookies will not be attached to contacts created through the end
 #### Usage:
 
 ```
-const driftApi =  require("drift-npm");
+const driftApi =  require("driftapi-npm");
 const  token  =  "XXXXXXXXXXXXXX"; //Replace with your token;
 const options = {
 	email: "user@email.com",
