@@ -1,5 +1,5 @@
 {
-  "name": "drift-npm",
+  "name": "driftapi-npm",
   "version": "1.0.0",
   "description": "NPM Package for Drift.com API",
   "main": "index.js",
